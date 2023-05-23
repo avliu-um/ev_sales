@@ -46,9 +46,6 @@ driver = get_driver()
 ev_names_df = pd.read_csv('./data/all_evs.csv',header=None)
 ev_names = list(ev_names_df[0].values)
 
-# TODO: Place on Github
-# TODO: Other search phrases, such as "electric vehicles"
-
 # testing
 #ev_names = ev_names[:2]
 
@@ -68,5 +65,5 @@ for ev_name in ev_names:
         print(f'failed for ev {ev_name}')
         print(e)
 
-# TODO exit the driver!
+driver.close()
 print('done!')
