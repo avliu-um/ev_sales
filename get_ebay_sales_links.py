@@ -4,7 +4,11 @@ import time
 
 import pandas as pd
 
-from util import get_driver
+from util import get_selenium_driver
+
+
+# Note: This script could've been done using BeautifulSoup.
+# Since we only plan on running this one, I'll keep it this way.
 
 
 def get_ebay_sales_links(driver, keyword):
@@ -19,7 +23,7 @@ def get_ebay_sales_links(driver, keyword):
     return links
 
 
-driver = get_driver()
+driver = get_selenium_driver()
 
 ev_names_df = pd.read_csv('./data/all_evs.csv',header=None)
 ev_names = list(ev_names_df[0].values)
@@ -38,7 +42,7 @@ for ev_name in ev_names:
         print(f'ev_name: {ev_name}')
         print(f'link count: {len(links)}')
 
-        links_df.to_csv('./data/ebay_ev_sales.csv', mode='a',index=False)
+        links_df.to_csv('./data/ebay_ev_sales_links.csv', mode='a',index=False)
     except Exception as e:
         print(f'failed for ev {ev_name}')
         print(e)

@@ -1,11 +1,13 @@
 import json
-import sys
 from os import path
+import re
 
 from selenium import webdriver
+from bs4 import BeautifulSoup
+from urllib.request import Request, urlopen
 
 
-def get_driver():
+def get_selenium_driver():
     adblock_filepath = 'lib/adblock.crx'
 
     # Can include more chromedrivers if necessary
@@ -23,6 +25,20 @@ def get_driver():
     return driver
 
 
+def get_soup(url):
+    req = Request(url)
+    html_page = urlopen(req)
+    soup = BeautifulSoup(html_page, 'html.parser')
+    return soup
+
+
+def get_soup_text(soup: BeautifulSoup, search_str: str, one=False):
+    if one:
+        return format_str(soup.select_one(search_str).text)
+    else:
+        return map(lambda x: format_str(x.text), soup.select(search_str))
+
+
 def append_to_json(json_file, new_data):
     if path.isfile(json_file):
         with open(json_file, 'r') as fp:
@@ -34,3 +50,7 @@ def append_to_json(json_file, new_data):
 
     with open(json_file, 'w') as fp:
         json.dump(all_data, fp, indent=4, separators=(',', ': '))
+
+
+def format_str(s):
+    return re.sub("[\n\t]+", '|', s)
