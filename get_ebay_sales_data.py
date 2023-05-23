@@ -1,8 +1,7 @@
-import time
-
+import time, json
 import pandas as pd
 
-from util import get_driver
+from util import get_driver, append_to_json
 
 
 def get_sales_data(driver, item_link):
@@ -41,7 +40,9 @@ for sl in sales_links:
 
         data = pd.Series(data_dict).to_frame().T
         data.to_csv('./data/ebay_ev_data.csv', mode='a')
-        # append data
+
+        append_to_json('./data/ebay_ev_data.json', data_dict)
+
     except Exception as e:
         print(f'failed')
         print(e)
@@ -49,3 +50,4 @@ for sl in sales_links:
 driver.close()
 print('\ndone!')
 
+#TODO: GITHUB

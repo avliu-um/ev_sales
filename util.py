@@ -1,6 +1,8 @@
-from selenium import webdriver
+import json
 import sys
+from os import path
 
+from selenium import webdriver
 
 
 def get_driver():
@@ -24,3 +26,15 @@ def get_driver():
     # driver.maximize_window()
 
     return driver
+
+
+def append_to_json(json_file, new_data):
+    # write if new
+    if path.isfile(json_file):
+        with open(json_file, 'r') as fp:
+            all_data = json.load(fp)
+    else:
+        all_data = []
+    all_data.append(new_data)
+    with open(json_file, 'w') as fp:
+        json.dump(all_data, fp, indent=4, separators=(',', ': '))
