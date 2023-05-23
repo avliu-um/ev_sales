@@ -28,7 +28,7 @@ def get_sales_data(driver, item_link):
 sales_links = pd.read_csv('./data/ebay_ev_sales.csv')['link']
 
 # testing
-sales_links = sales_links[1:3]
+sales_links = sales_links[1:10]
 
 driver = get_driver()
 for sl in sales_links:
@@ -38,9 +38,6 @@ for sl in sales_links:
         data_dict['item_link'] = sl
         print(f'data: {data_dict}')
 
-        data = pd.Series(data_dict).to_frame().T
-        data.to_csv('./data/ebay_ev_data.csv', mode='a')
-
         append_to_json('./data/ebay_ev_data.json', data_dict)
 
     except Exception as e:
@@ -49,5 +46,3 @@ for sl in sales_links:
 
 driver.close()
 print('\ndone!')
-
-#TODO: GITHUB

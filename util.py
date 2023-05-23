@@ -6,7 +6,6 @@ from selenium import webdriver
 
 
 def get_driver():
-
     adblock_filepath = 'conf/webdriver/adblock.crx'
     if sys.platform == 'win32':
         driver_path = 'conf/webdriver/chromedriver_mac64.exe'
@@ -23,7 +22,6 @@ def get_driver():
 
     chrome_options.add_extension(adblock_filepath)
     driver = webdriver.Chrome(driver_path, options=chrome_options)
-    # driver.maximize_window()
 
     return driver
 
