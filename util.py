@@ -6,13 +6,8 @@ from selenium import webdriver
 
 
 def get_driver():
-    adblock_filepath = 'conf/webdriver/adblock.crx'
-    if sys.platform == 'win32':
-        driver_path = 'conf/webdriver/chromedriver_mac64.exe'
-    elif sys.platform == 'darwin':
-        driver_path = 'conf/webdriver/chromedriver_mac64'
-    else:
-        driver_path = 'conf/webdriver/chromedriver_linux64'
+    adblock_filepath = 'lib/adblock.crx'
+    driver_path = 'lib/chromedriver_mac64'
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--mute-audio')
