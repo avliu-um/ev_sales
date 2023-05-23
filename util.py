@@ -7,6 +7,8 @@ from selenium import webdriver
 
 def get_driver():
     adblock_filepath = 'lib/adblock.crx'
+
+    # Can include more chromedrivers if necessary
     driver_path = 'lib/chromedriver_mac64'
 
     chrome_options = webdriver.ChromeOptions()
@@ -22,12 +24,13 @@ def get_driver():
 
 
 def append_to_json(json_file, new_data):
-    # write if new
     if path.isfile(json_file):
         with open(json_file, 'r') as fp:
             all_data = json.load(fp)
     else:
         all_data = []
+
     all_data.append(new_data)
+
     with open(json_file, 'w') as fp:
         json.dump(all_data, fp, indent=4, separators=(',', ': '))
