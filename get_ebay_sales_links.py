@@ -1,35 +1,13 @@
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-import sys
 import time
 
 import pandas as pd
 
-def get_driver():
-
-    adblock_filepath = 'conf/webdriver/adblock.crx'
-    if sys.platform == 'win32':
-        driver_path = 'conf/webdriver/chromedriver_mac64.exe'
-    elif sys.platform == 'darwin':
-        driver_path = 'conf/webdriver/chromedriver_mac64'
-    else:
-        driver_path = 'conf/webdriver/chromedriver_linux64'
-
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--mute-audio')
-
-    # for chrome_argument in chrome_arguments:
-    #    chrome_options.add_argument(chrome_argument)
-
-    chrome_options.add_extension(adblock_filepath)
-    driver = webdriver.Chrome(driver_path, options=chrome_options)
-    driver.maximize_window()
-
-    return driver
+from util import get_driver
 
 
-def get_sales_links(driver, keyword):
+def get_ebay_sales_links(driver, keyword):
 
     formatted_keyword = keyword.replace(' ', '+')
     driver.get(f'https://www.ebay.com/sch/6001/i.html?_from=R40&_nkw={formatted_keyword}+&LH_TitleDesc=1&_sop=-1&LH_Complete=1&LH_Sold=1&_ipg=240')
@@ -51,7 +29,7 @@ ev_names = list(ev_names_df[0].values)
 
 for ev_name in ev_names:
     try:
-        links = get_sales_links(driver, ev_name)
+        links = get_ebay_sales_links(driver, ev_name)
         links_df = pd.DataFrame(data={
             'ev_name': [ev_name for i in range(len(links))],
             'link': links
