@@ -8,11 +8,8 @@ def get_sales_data(item_link):
     soup = get_soup(item_link)
     info = {}
 
-    price = get_soup_text(soup, 'div[class*="vi-price"]', one=True)
-    info['price'] = price
-
     general_info = get_soup_text(soup, 'div[class="vi-cviprow"] div[class*="u-flL"]')
-    for i in range(0, len(general_info)//2, 2):
+    for i in range(0, len(general_info), 2):
         info[remove_symbols_str(general_info[i])] = general_info[i+1]
 
     labels_text = get_soup_text(soup, 'div[class*="labels-content"]')
@@ -36,9 +33,7 @@ for sl in sales_links:
     print(f'\nsales link: {sl}')
     try:
         data_dict = get_sales_data(sl)
-
-        data_dict['item_link'] = sl
-        data_dict['item_id'] = sl[len('https://www.ebay.com/itm/'):sl.find('?')]
+        data_dict['ebay_item_id'] = sl[len('https://www.ebay.com/itm/'):sl.find('?')]
 
         print(f'data: {data_dict}')
 

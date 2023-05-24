@@ -53,7 +53,7 @@ def append_to_json(json_file, new_data):
 
 
 def format_str(s):
-    return re.sub("[\n\t]+", '|', s)
+    return re.sub("[\n\t\r]+", '|', s)
 
 
 def remove_symbols_str(s):
