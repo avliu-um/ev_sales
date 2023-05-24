@@ -25,7 +25,7 @@ def get_ebay_sales_links(driver, keyword):
 
 driver = get_selenium_driver()
 
-ev_names_df = pd.read_csv('./data/all_evs.csv',header=None)
+ev_names_df = pd.read_csv('data/ev_names.csv', header=None)
 ev_names = list(ev_names_df[0].values)
 
 # testing
