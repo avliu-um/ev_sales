@@ -1,7 +1,7 @@
 import time, json
 import pandas as pd
 
-from util import get_soup, get_soup_text, append_to_json
+from util import get_soup, get_soup_text, append_to_json, remove_symbols_str
 
 
 def get_sales_data(item_link):
@@ -10,6 +10,10 @@ def get_sales_data(item_link):
 
     price = get_soup_text(soup, 'div[class*="vi-price"]', one=True)
     info['price'] = price
+
+    general_info = get_soup_text(soup, 'div[class="vi-cviprow"] div[class*="u-flL"]')
+    for i in range(0, len(general_info)//2, 2):
+        info[remove_symbols_str(general_info[i])] = general_info[i+1]
 
     labels_text = get_soup_text(soup, 'div[class*="labels-content"]')
     values_text = get_soup_text(soup, 'div[class*="values-content"]')

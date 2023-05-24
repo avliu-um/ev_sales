@@ -36,7 +36,7 @@ def get_soup_text(soup: BeautifulSoup, search_str: str, one=False):
     if one:
         return format_str(soup.select_one(search_str).text)
     else:
-        return map(lambda x: format_str(x.text), soup.select(search_str))
+        return list(map(lambda x: format_str(x.text), soup.select(search_str)))
 
 
 def append_to_json(json_file, new_data):
@@ -54,3 +54,7 @@ def append_to_json(json_file, new_data):
 
 def format_str(s):
     return re.sub("[\n\t]+", '|', s)
+
+
+def remove_symbols_str(s):
+    return re.sub("[|+:,.]", '', s)
