@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import urllib.error
 
-
 def get_selenium_driver():
     adblock_filepath = 'lib/adblock.crx'
 
@@ -70,6 +69,12 @@ def append_to_json(json_file, new_data):
 
     with open(json_file, 'w') as fp:
         json.dump(all_data, fp, indent=4, separators=(',', ': '))
+
+
+def append_to_csv(csv_file, new_data):
+    with open(csv_file, 'a') as f:
+        for data in new_data:
+            f.write(f'{data}\n')
 
 
 def format_str(s):
