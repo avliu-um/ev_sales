@@ -9,10 +9,10 @@ from urllib.request import Request, urlopen
 import urllib.error
 
 def get_selenium_driver():
-    adblock_filepath = 'lib/adblock.crx'
+    adblock_filepath = './lib/adblock.crx'
 
     # Can include more chromedrivers if necessary
-    driver_path = 'lib/chromedriver_mac64'
+    driver_path = './lib/chromedriver_mac64'
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--mute-audio')
