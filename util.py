@@ -4,24 +4,27 @@ import re
 import time
 
 from selenium import webdriver
+import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import urllib.error
 
-def get_selenium_driver():
-    adblock_filepath = './lib/adblock.crx'
+def get_selenium_driver(undetected=False):
+    adblock_filepath = '../lib/adblock.crx'
 
     # Can include more chromedrivers if necessary
-    driver_path = './lib/chromedriver_mac64'
+    driver_path = '../lib/chromedriver_mac64'
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--mute-audio')
+    if undetected:
+        CHROME_VERSION = 113
+        chrome_options = uc.ChromeOptions()
+        driver = uc.Chrome(options=chrome_options, version_main=CHROME_VERSION)
 
-    # for chrome_argument in chrome_arguments:
-    #    chrome_options.add_argument(chrome_argument)
-
-    chrome_options.add_extension(adblock_filepath)
-    driver = webdriver.Chrome(driver_path, options=chrome_options)
+    else:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--mute-audio')
+        chrome_options.add_extension(adblock_filepath)
+        driver = webdriver.Chrome(driver_path, options=chrome_options)
 
     return driver
 
