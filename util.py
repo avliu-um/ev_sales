@@ -54,6 +54,7 @@ def get_soup(url):
     return soup
 
 
+# Get all the text within elements found using search_str
 def get_soup_text(soup: BeautifulSoup, search_str: str, one=False):
     if one:
         return format_str(soup.select_one(search_str).text)
@@ -74,15 +75,17 @@ def append_to_json(json_file, new_data):
         json.dump(all_data, fp, indent=4, separators=(',', ': '))
 
 
-def append_to_csv(csv_file, new_data):
-    with open(csv_file, 'a') as f:
+def append_to_file(file_name, new_data):
+    with open(file_name, 'a') as f:
         for data in new_data:
             f.write(f'{data}\n')
 
 
+# Replace newlines/tabs with the symbol |
 def format_str(s):
     return re.sub("[\n\t\r]+", '|', s)
 
 
+# Remove unnecessary symbols from a string
 def remove_symbols_str(s):
     return re.sub("[|+:,.]", '', s)

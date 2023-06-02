@@ -1,4 +1,4 @@
-from util import get_selenium_driver, append_to_csv
+from util import get_selenium_driver, append_to_file
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,6 +15,7 @@ while True:
           f'=include&isNewSearch=false&showAccelerateBanner=false&sortBy=relevance&numRecords=100&firstRecord={page*100}'
     driver.get(url)
 
+    # Wait for the links to show up, becuase they take a while to render
     WebDriverWait(driver, 40).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'div[data-cmp="itemCard"] div[class="item-card-body margin-bottom-auto"] a'))
     )
@@ -31,7 +32,7 @@ while True:
             if link:
                 links.append(link)
         print(f'{len(links)} links from page {page}')
-        append_to_csv('./data/links.csv', links)
+        append_to_file('./data/links.csv', links)
         page += 1
 
     page += 1

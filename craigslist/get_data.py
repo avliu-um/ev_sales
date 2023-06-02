@@ -1,8 +1,9 @@
 import pandas as pd
-from util import get_soup, get_soup_text, append_to_json, remove_symbols_str
+from util import get_soup, get_soup_text, append_to_json
 import traceback
 
 
+# Parse a selse link for the data we require
 def get_sales_data(link):
     soup = get_soup(link)
     info = {}

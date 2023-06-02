@@ -1,4 +1,4 @@
-from util import get_selenium_driver, append_to_csv
+from util import get_selenium_driver, append_to_file
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -30,6 +30,9 @@ cities = [
 for city in cities:
     page = 0
 
+    # Just in case the method used to detect no more results is broken; prevents infinite looping
+    backstop = 500
+
     while True:
         city_car_url = f'https://{city}.craigslist.org/search/cta#search=1~list~{page}~0'
         driver.get(city_car_url)
@@ -41,16 +44,17 @@ for city in cities:
         link_elements = driver.find_elements(By.CSS_SELECTOR, 'a[class="titlestring"]')
 
         # When the pages gets out of range, it defaults to the last valid page
-        if driver.current_url == city_car_url:
+        if driver.current_url != city_car_url or page>=backstop:
+            break
+        else:
             links = []
             for link_elem in link_elements:
                 link = link_elem.get_attribute('href')
                 if link:
                     links.append(link)
             print(f'{len(links)} links from page {page} of city {city}')
-            append_to_csv('./data/links.csv', links)
+            append_to_file('./data/links.csv', links)
             page += 1
-        else:
-            break
+
 
 print('\ndone!')

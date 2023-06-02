@@ -8,9 +8,9 @@ import pandas as pd
 from util import get_soup, get_soup_text, append_to_json, remove_symbols_str
 
 
-def get_leftover_item_links():
+# Get remaining links to scrape by comparing data/links.csv and the items already in data/data.json
+def get_remaining_item_links():
     all_item_links = pd.read_csv('data/links.csv', header=None)[0]
-    # Get remaining links to scrape
 
     data_file = './data/data.json'
     if not os.path.exists(data_file):
@@ -27,6 +27,7 @@ def get_leftover_item_links():
         return leftover
 
 
+# Parse a selse link for the data we require, including price, location, and other info
 def get_sales_data(link):
     soup = get_soup(link)
     info = {}
@@ -52,8 +53,7 @@ def get_sales_data(link):
     return info
 
 
-leftover_item_links = get_leftover_item_links()
-
+# Make a mysql connection and create a table if it exists
 table_name = 'ebay_ev_sales'
 mydb = mysql.connector.connect(
   host="localhost",
@@ -77,6 +77,7 @@ mycursor.execute(
     f")"
 )
 
+leftover_item_links = get_remaining_item_links()
 # testing
 # leftover_item_links = leftover_item_links[:10]
 
@@ -87,10 +88,11 @@ for item_link in leftover_item_links:
         data_dict['ebay_item_id'] = item_link[len('https://www.ebay.com/itm/'):item_link.find('?')]
         data_dict['time'] = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         print(f'data: {data_dict}')
+
+        # write to json
         append_to_json('data/data.json', data_dict)
 
-        # insert into mysql
-        # This could be changed to update non-primary keys if primary keys are duplicate
+        # write to mysql
         sql = f"INSERT IGNORE INTO {table_name} VALUES (%s, now(), %s, %s, %s, %s, %s, %s)"
         val_list = []
         for col in ['vin', 'make', 'model', 'price', 'location', 'fuel', 'ebay_item_id']:
