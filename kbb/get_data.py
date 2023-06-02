@@ -34,15 +34,8 @@ def get_sales_data(driver, link):
     }
     return info
 
-# TODO
-#all_item_links = pd.read_csv('./data/links.csv', header=None)[0]
-all_item_links = [
-    'https://www.kbb.com/cars-for-sale/vehicledetails.xhtml/?listingId=683814570&listingTypes=USED&city=Mount'
-    '%20Pleasant&state=MI&zip=48858&searchRadius=200&marketExtension=include&isNewSearch=false&showAccelerateBanner'
-    '=false&sortBy=relevance&numRecords=100&firstRecord=300&referrer=%2Fcars-for-sale%2Fused%2Fmount-pleasant-mi'
-    '%3FsearchRadius%3D200%26zip%3D48858%26marketExtension%3Dinclude%26isNewSearch%3Dfalse%26showAccelerateBanner'
-    '%3Dfalse%26sortBy%3Drelevance%26numRecords%3D100%26firstRecord%3D300&clickType=listing '
-]
+
+all_item_links = pd.read_csv('./data/links.csv', header=None)[0]
 
 driver = get_selenium_driver(undetected=True)
 
