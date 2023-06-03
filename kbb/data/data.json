@@ -1,11 +1,5 @@
 [
     {
-        "vin": "3GCUKREC0GG136024",
-        "price": "30,000",
-        "title": "Used 2016 Chevrolet Silverado 1500 LT w/ All Star Edition",
-        "state": "MI"
-    },
-    {
         "vin": "1FT8W2BT7MED24365",
         "price": "82,500",
         "title": "Certified 2021 Ford F250 Lariat w/ Lariat Ultimate Package",
@@ -21,6 +15,24 @@
         "vin": "1FT8W2BT7MED24365",
         "price": "82,500",
         "title": "Certified 2021 Ford F250 Lariat w/ Lariat Ultimate Package",
+        "state": "MI"
+    },
+    {
+        "vin": "3MW5R7J05L8B30298",
+        "price": "35,490",
+        "title": "Used 2020 BMW 330i xDrive Sedan w/ Driving Assistance Package",
+        "state": "MI"
+    },
+    {
+        "vin": "1GNSKRKD7MR468033",
+        "price": "64,559",
+        "title": "Used 2021 Chevrolet Tahoe RST",
+        "state": "MI"
+    },
+    {
+        "vin": "3GNAXJEVXLS689429",
+        "price": "23,495",
+        "title": "Used 2020 Chevrolet Equinox LT w/ Driver Convenience Package",
         "state": "MI"
     }
 ]
