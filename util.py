@@ -13,6 +13,7 @@ def get_selenium_driver(undetected=False):
     adblock_filepath = '../lib/adblock.crx'
 
     # Can include more chromedrivers if necessary
+    # See here for example: https://github.com/avalanchesiqi/youtube-polarizer/blob/master/polarizer.py
     driver_path = '../lib/chromedriver_mac64'
 
     if undetected:
