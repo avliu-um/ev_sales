@@ -9,6 +9,9 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import urllib.error
 
+import mysql.connector
+
+
 
 def get_selenium_driver(undetected=False):
     adblock_filepath = './lib/adblock.crx'
@@ -29,7 +32,6 @@ def get_selenium_driver(undetected=False):
 
 
 def get_soup(url):
-
     success = False
     sleep_time = 1
     max_sleep_time = 60 * 5
@@ -90,7 +92,31 @@ def remove_symbols_str(s):
     return re.sub("[|+:,.]", '', s)
 
 
+def write_to_rds():
+    # Make a mysql connection and create a table if it exists
+    table_name = 'ebay_ev_sales'
+    mydb = mysql.connector.connect(
+        host="database-1.cchq0zbz9fej.us-east-1.rds.amazonaws.com",
+        user="admin",
+        password="12345678",
+        database="ev-database-test"
+    )
+    mycursor = mydb.cursor()
+    mycursor.execute(
+        f"CREATE TABLE IF NOT EXISTS {table_name} "
+        f"("
+        f"vin VARCHAR(255), "
+        f"date_accessed date, "
+        f"make VARCHAR(255), "
+        f"model VARCHAR(255), "
+        f"price VARCHAR(255), "
+        f"location VARCHAR(255), "
+        f"fuel VARCHAR(255),"
+        f"ebay_item_id VARCHAR(255),"
+        f"PRIMARY KEY (vin, date_accessed)"
+        f")"
+    )
+
+
 if __name__ == '__main__':
-    sd = get_selenium_driver(undetected=True)
-    sd.get('https://espn.com')
-    time.sleep(10)
+    write_to_rds()
