@@ -9,23 +9,21 @@ from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
 import urllib.error
 
-def get_selenium_driver(undetected=False):
-    adblock_filepath = '../lib/adblock.crx'
 
-    # Can include more chromedrivers if necessary
-    # See here for example: https://github.com/avalanchesiqi/youtube-polarizer/blob/master/polarizer.py
-    driver_path = '../lib/chromedriver_mac64'
+def get_selenium_driver(undetected=False):
+    adblock_filepath = './lib/adblock.crx'
 
     if undetected:
-        CHROME_VERSION = 113
         chrome_options = uc.ChromeOptions()
-        driver = uc.Chrome(options=chrome_options, version_main=CHROME_VERSION)
+        chrome_options.add_argument('--mute-audio')
+        chrome_options.add_extension(adblock_filepath)
+        driver = uc.Chrome(options=chrome_options)
 
     else:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--mute-audio')
         chrome_options.add_extension(adblock_filepath)
-        driver = webdriver.Chrome(driver_path, options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options)
 
     return driver
 
@@ -90,3 +88,9 @@ def format_str(s):
 # Remove unnecessary symbols from a string
 def remove_symbols_str(s):
     return re.sub("[|+:,.]", '', s)
+
+
+if __name__ == '__main__':
+    sd = get_selenium_driver(undetected=True)
+    sd.get('https://espn.com')
+    time.sleep(10)
