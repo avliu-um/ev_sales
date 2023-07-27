@@ -34,5 +34,11 @@
         "price": "23,495",
         "title": "Used 2020 Chevrolet Equinox LT w/ Driver Convenience Package",
         "state": "MI"
+    },
+    {
+        "vin": "W1W4DBHY0MT049011",
+        "price": "99,990",
+        "title": "Used 2021 Mercedes-Benz Sprinter 144\" Cargo",
+        "state": "MI"
     }
 ]
