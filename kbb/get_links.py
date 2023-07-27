@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-driver = get_selenium_driver()
+driver = get_selenium_driver(undetected=True)
 
 
 page = 0
@@ -23,12 +23,15 @@ while True:
     link_elements = driver.find_elements(By.CSS_SELECTOR, 'div[data-cmp="itemCard"] div[class="item-card-body margin-bottom-auto"] a')
 
     # When the pages gets out of range, it defaults to the last valid page
-    if 'No more results found' in driver.page_source or 'No results found' in driver.page_source or page>=backstop:
+    if 'No more results found' in driver.page_source or page>=backstop:
         break
     else:
         links = []
         for link_elem in link_elements:
-            link = link_elem.get_attribute('href')
+            try:
+                link = link_elem.get_attribute('href')
+            except Exception as e:
+                pass
             if link:
                 links.append(link)
         print(f'{len(links)} links from page {page}')
