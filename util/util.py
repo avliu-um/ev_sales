@@ -12,9 +12,9 @@ import urllib.error
 import mysql.connector
 
 
-
 def get_selenium_driver(undetected=False):
-    adblock_filepath = './lib/adblock.crx'
+
+    adblock_filepath = '../lib/adblock.crx'
 
     if undetected:
         chrome_options = uc.ChromeOptions()
