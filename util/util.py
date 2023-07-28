@@ -25,7 +25,7 @@ def get_selenium_driver(undetected=False):
     else:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--mute-audio')
-        chrome_options.add_extension(adblock_filepath)
+        #chrome_options.add_extension(adblock_filepath)
         driver = webdriver.Chrome(options=chrome_options)
 
     return driver
