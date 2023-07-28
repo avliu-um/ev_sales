@@ -4,6 +4,8 @@ import re
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 from urllib.request import Request, urlopen
@@ -22,10 +24,11 @@ def get_selenium_driver(undetected=False):
         driver = uc.Chrome(options=chrome_options, version_main=CHROME_VERSION)
 
     else:
+        service = Service(executable_path=driver_path)
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument('--mute-audio')
         chrome_options.add_extension(adblock_filepath)
-        driver = webdriver.Chrome(driver_path, options=chrome_options)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
 
     return driver
 

@@ -2,4 +2,4 @@ beautifulsoup4==4.12.2
 mysql_connector_repackaged==0.3.1
 pandas==2.0.2
 selenium==4.10.0
-undetected_chromedriver==3.4.7
+undetected_chromedriver==3.5.0

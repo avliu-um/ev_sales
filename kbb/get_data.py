@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import time
 
 
-# Parse a selse link for the data we require, including price, location, and vin
+# Parse a sales link for the data we require, including price, location, and vin
 def get_sales_data(driver, link):
     driver.get(link)
 

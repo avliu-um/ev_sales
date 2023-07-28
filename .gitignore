@@ -1,1 +1,28 @@
+### modified python .gitignore file from template at https://github.com/github/gitignore/blob/main/Python.gitignore ###
+
+
 env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# macOS
+.DS_Store
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# archived repo folders
+carvana
+carfax
