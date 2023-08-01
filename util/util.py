@@ -11,6 +11,8 @@ import urllib.error
 
 import mysql.connector
 
+import boto3
+
 
 def get_selenium_driver(undetected=False):
 
@@ -117,6 +119,37 @@ def write_to_rds():
         f")"
     )
 
+def test_write_logs():
+    AWS_REGION = "us-west-2" #TODO: Fill
+    client = boto3.client('cloudwatch', region_name=AWS_REGION)
+    response = client.put_log_events(
+        logGroupName='TODO',
+        logStreamName='TODO',
+        logEvents=[
+            {
+                'timestamp': 123,
+                'message': 'THIS IS A TEST LOG MESSAGE'
+            },
+        ],
+        sequenceToken='TODO'
+    )
+
+
+def write_to_bucket(aws_bucket, source, dest):
+    # Make sure to configure ~/.aws/configure file
+    s3 = boto3.resource('s3')
+    s3.Bucket(aws_bucket).upload_file(source, dest)
+
+
+def main():
+    bucket = 'test-youtube-audit-bucket'
+    f = open("test_result_file.txt", "a")
+    f.write("File content!")
+    f.close()
+    destination = 'test_folder/test_results_file.txt'
+
+    write_to_bucket(bucket, "./test_result_file.txt", destination)
+
 
 if __name__ == '__main__':
-    write_to_rds()
+    main()
