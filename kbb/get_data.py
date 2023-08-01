@@ -4,12 +4,24 @@ import traceback
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 import time
 
 
 # Parse a selse link for the data we require, including price, location, and vin
 def get_sales_data(driver, link):
     driver.get(link)
+
+    # wait for, then scroll from, the "make a deal" container
+    WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'div[id="nativeDealContainer"]'))
+    )
+    above_container = driver.find_element(By.CSS_SELECTOR, 'div[id="nativeDealContainer"]')
+    scroll_origin = ScrollOrigin.from_element(above_container)
+    ActionChains(driver) \
+        .scroll_from_origin(scroll_origin, 0, 500) \
+        .perform()
 
     WebDriverWait(driver, 60).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]'))
@@ -42,6 +54,7 @@ driver = get_selenium_driver(undetected=True)
 
 start_secs = time.time()
 for item_link in all_item_links:
+    print(f'processing link: {item_link}')
     try:
         data_dict = get_sales_data(driver, item_link)
         print(f'data: {data_dict}')
