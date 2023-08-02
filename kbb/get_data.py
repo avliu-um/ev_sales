@@ -1,4 +1,4 @@
-from util.util import get_selenium_driver, append_to_json
+from scraper_util_avliu.util import get_selenium_driver, append_to_json
 import pandas as pd
 import traceback
 from selenium.webdriver.common.by import By
