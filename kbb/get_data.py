@@ -7,6 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 import time
+import re
 
 
 # Parse a selse link for the data we require, including price, location, and vin
@@ -26,24 +27,37 @@ def get_sales_data(driver, link):
     WebDriverWait(driver, 60).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]'))
     )
-    comment = driver.find_element(By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]').text
+    comment = driver.find_element(By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]').text.lower()
 
     vin_idx = comment.lower().find('vin: ') + len('vin: ')
     # https://www.lithia.com/research/how-to/how-to-decode-your-cars-vin-number.htm
     vin_length = 17
     vin = comment[vin_idx:vin_idx+vin_length]
-    price = driver.find_element(By.CSS_SELECTOR, 'div[data-cmp="pricing"]').text
-    title = driver.find_element(By.CSS_SELECTOR, 'h1[data-cmp="heading"]').text
+    price = driver.find_element(By.CSS_SELECTOR, 'div[data-cmp="pricing"]').text.lower()
+    title = driver.find_element(By.CSS_SELECTOR, 'h1[data-cmp="heading"]').text.lower()
 
     url = driver.current_url
     state_idx = url.find('&state=') + len('&state=')
     state = url[state_idx:state_idx+2]
 
+    # fuel type and mileage are in a table and the only sensible labels don't actually contain the text we want;
+    # hence, the workaround by searching the table text itself
+    list_elem = driver.find_element(By.CSS_SELECTOR, 'div[data-cmp="section"]').text.lower()
+    words = re.split('[\n ]', list_elem)
+
+    engine_idx = words.index('engine')-1
+    engine = words[engine_idx].strip()
+
+    miles_idx = words.index('miles')-1
+    mileage = words[miles_idx].strip()
+
     info = {
         'vin': vin,
         'price': price,
         'title': title,
-        'state': state
+        'state': state,
+        'engine': engine,
+        'mileage': mileage
     }
     return info
 

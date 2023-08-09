@@ -88,5 +88,37 @@
         "price": "20,168",
         "title": "Used 2018 Jeep Compass Latitude w/ Popular Equipment Group",
         "state": "MI"
+    },
+    {
+        "vin": "w1w4dbhy0mt049011",
+        "price": "99,990",
+        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
+        "state": "MI",
+        "engine": "diesel",
+        "mileage": "17,385"
+    },
+    {
+        "vin": "w1w4dbhy0mt049011",
+        "price": "99,990",
+        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
+        "state": "MI",
+        "engine": "diesel",
+        "mileage": "17,385"
+    },
+    {
+        "vin": "w1w4dbhy0mt049011",
+        "price": "99,990",
+        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
+        "state": "MI",
+        "engine": "diesel",
+        "mileage": "17,385"
+    },
+    {
+        "vin": "3gnaxjevxls689429",
+        "price": "21,379",
+        "title": "used 2020 chevrolet equinox lt w/ driver convenience package",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "21,922"
     }
 ]
