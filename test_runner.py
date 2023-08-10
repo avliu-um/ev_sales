@@ -1,5 +1,7 @@
 import boto3
 import datetime
+import os
+
 # TODO: Abstract these functions into util
 
 
@@ -33,9 +35,14 @@ def write_to_bucket(aws_bucket, source, dest):
 def test_write_s3():
     bucket = 'ev-cloud-testing'
     destination = 'test_copy/kbb_data.txt'
-    write_to_bucket(bucket, "./kbb/data/data.json", destination)
-    write_cloudwatch_log('done!')
+    try:
+        write_to_bucket(bucket, "./kbb/data/data.json", destination)
+        write_cloudwatch_log('done!')
+    except Exception as e:
+        write_cloudwatch_log('error!')
+        pass
 
 
 if __name__ == '__main__':
+    print(f'pwd: {os.getcwd()}')
     test_write_s3()
