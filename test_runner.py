@@ -1,48 +1,23 @@
 import boto3
 import datetime
 import os
+from scraper_util_avliu.util import get_soup, write_to_bucket
 
 # TODO: Abstract these functions into util
 
-
-def get_log_time():
-    dt = datetime.datetime.now()
-    epoch = datetime.datetime.utcfromtimestamp(0)
-    time = int((dt - epoch).total_seconds() * 1000.0)
-    return time
-
-def write_cloudwatch_log(message):
-    client = boto3.client('logs')
-    response = client.put_log_events(
-        logGroupName='test_local_to_cloudwatch',
-        logStreamName='test_stream',
-        logEvents=[
-            {
-                'timestamp': get_log_time(),
-                'message': message
-            },
-        ]
-        #,sequenceToken='string'
-    )
-    print(f'response: {response}')
-
-def write_to_bucket(aws_bucket, source, dest):
-    # Make sure to configure ~/.aws/configure file
-    s3 = boto3.resource('s3')
-    s3.Bucket(aws_bucket).upload_file(source, dest)
-
-
-def test_write_s3():
-    bucket = 'ev-cloud-testing'
-    destination = 'test_copy/kbb_data.txt'
-    try:
-        write_to_bucket(bucket, "./kbb/data/data.json", destination)
-        write_cloudwatch_log('done!')
-    except Exception as e:
-        write_cloudwatch_log('error!')
-        pass
+def get_soup_write(url):
+    soup = get_soup(url)
+    with open("./output.html", "w", encoding='utf-8') as file:
+        # prettify the soup object and convert it into a string
+        file.write(str(soup.prettify()))
+    write_to_bucket('./output.html', 'ev-cloud-testing', 'test_write_output.html')
 
 
 if __name__ == '__main__':
     print(f'pwd: {os.getcwd()}')
-    test_write_s3()
+    url = ('https://www.ebay.com/itm/256048040264?hash=item3b9da70948:g:fHIAAOSwieBkPtU~&amdata=enc'
+           '%3AAQAIAAAAwMYpbKTPPpChZHBE9RJjvHvE%2B%2BxiqM7FG0BDDo0B502BPtXd1VpmOIjdlLj3wxzDc%2Fc'
+           '%2Bm36IDbLHZAL4uxZXcIjHRoTmvK0QdYIILdy2AhV1CvRYpsdZg0'
+           '%2FXnc2XZrwuw4J7YpWbHJiny14CAnLuEJPnuvvGZV6Hbh7ZJo5WucloyV0Hp3vQUGXNjxK129a9S%2FawYgT5'
+           '%2Br0SR81vzzrrEVmXQDD60H4HqzPbhyenwROg9C5hIh3ThQtf01qzjbOvBQ%3D%3D%7Ctkp%3ABk9SR4KS4eGIYg')
+    get_soup_write(url)
