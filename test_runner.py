@@ -10,7 +10,7 @@ def get_soup_write(url):
     with open("./output.html", "w", encoding='utf-8') as file:
         # prettify the soup object and convert it into a string
         file.write(str(soup.prettify()))
-    write_to_bucket('./output.html', 'ev-cloud-testing', 'test_write_output.html')
+    write_to_bucket('ev-cloud-testing', './output.html',  'test_write_output.html')
 
 
 if __name__ == '__main__':
