@@ -52,6 +52,8 @@ def get_sales_data(driver, link):
     miles_idx = words.index('miles')-1
     mileage = words[miles_idx].strip()
 
+    # TODO: Test this
+
     # Sale date
     soup = get_soup(driver)
 
@@ -63,11 +65,11 @@ def get_sales_data(driver, link):
         # Extract the parent element's text
         parent_text = target_element.parent.get_text()
         parent_dict = json.loads(parent_text[len(target_str):])
-        pricing_dict = find_in_dict(parent_dict, 'pricingHistory')
-
-        print(pricing_dict)
+        pricing_history = find_in_dict(parent_dict, 'pricingHistory')
+        # TODO: Format
+        date = pricing_history
     else:
-        print("Target element not found.")
+        date = None
 
     info = {
         'vin': vin,
@@ -75,7 +77,8 @@ def get_sales_data(driver, link):
         'title': title,
         'state': state,
         'engine': engine,
-        'mileage': mileage
+        'mileage': mileage,
+        'date': date
     }
     return info
 

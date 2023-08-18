@@ -120,5 +120,31 @@
         "state": "MI",
         "engine": "gas",
         "mileage": "21,922"
+    },
+    {
+        "vin": "1c4njpfa2gd526872",
+        "price": "12,000",
+        "title": "used 2016 jeep patriot high altitude",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "93,463",
+        "date": [
+            {
+                "dateUpdated": "08.04.2023",
+                "price": "$13,500"
+            },
+            {
+                "dateUpdated": "08.05.2023",
+                "price": "$13,000"
+            },
+            {
+                "dateUpdated": "08.07.2023",
+                "price": "$12,500"
+            },
+            {
+                "dateUpdated": "Price Today",
+                "price": "$12,000"
+            }
+        ]
     }
 ]
