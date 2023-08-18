@@ -1,4 +1,4 @@
-from util.util import get_selenium_driver, append_to_file
+from scraper_util_avliu.util import get_selenium_driver, append_to_file
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

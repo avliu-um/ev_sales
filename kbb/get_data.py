@@ -1,4 +1,4 @@
-from scraper_util_avliu.util import get_selenium_driver, append_to_json
+from scraper_util_avliu.util import get_selenium_driver, append_to_json, get_soup, find_in_dict
 import pandas as pd
 import traceback
 from selenium.webdriver.common.by import By
@@ -8,6 +8,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 import time
 import re
+import json
 
 
 # Parse a selse link for the data we require, including price, location, and vin
@@ -50,6 +51,23 @@ def get_sales_data(driver, link):
 
     miles_idx = words.index('miles')-1
     mileage = words[miles_idx].strip()
+
+    # Sale date
+    soup = get_soup(driver)
+
+    # Find the element containing the target string
+    target_str = "window.__BONNET_DATA__="
+    target_element = soup.find(string=lambda text: text and target_str in text)
+
+    if target_element:
+        # Extract the parent element's text
+        parent_text = target_element.parent.get_text()
+        parent_dict = json.loads(parent_text[len(target_str):])
+        pricing_dict = find_in_dict(parent_dict, 'pricingHistory')
+
+        print(pricing_dict)
+    else:
+        print("Target element not found.")
 
     info = {
         'vin': vin,
