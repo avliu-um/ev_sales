@@ -4,6 +4,8 @@ import os
 from scraper_util_avliu.util import get_soup, write_to_bucket, get_selenium_driver
 
 
+# TODO: Move relevant functions to util
+
 def get_soup_write(url):
     soup = get_soup(url)
     with open("./output.html", "w", encoding='utf-8') as file:
@@ -13,7 +15,7 @@ def get_soup_write(url):
 
 
 def get_driver_write(url):
-    driver = get_selenium_driver()
+    driver = get_selenium_driver(undetected=True)
     driver.get(url)
     html = driver.page_source
 
@@ -25,3 +27,4 @@ def get_driver_write(url):
 
 if __name__ == '__main__':
     print(f'pwd: {os.getcwd()}')
+    get_driver_write('https://google.com')
