@@ -4,3 +4,4 @@ other/
 **/.ipynb_checkpoints
 **/.DS_Store
 ./idea/
+**/data
