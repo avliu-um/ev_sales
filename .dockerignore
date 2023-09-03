@@ -1,0 +1,8 @@
+env/
+.idea/
+.ipynb_checkpoints/
+other/
+*/data/
+*/samples/
+.gitignore
+.DS_Store
