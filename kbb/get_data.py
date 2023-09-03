@@ -29,11 +29,11 @@ def get_sales_data(driver, link):
         EC.presence_of_element_located((By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]'))
     )
     comment = driver.find_element(By.CSS_SELECTOR, 'div[id="sellerComments"] div[data-cmp="heading"]').text.lower()
-
     vin_idx = comment.lower().find('vin: ') + len('vin: ')
     # https://www.lithia.com/research/how-to/how-to-decode-your-cars-vin-number.htm
     vin_length = 17
     vin = comment[vin_idx:vin_idx+vin_length]
+
     price = driver.find_element(By.CSS_SELECTOR, 'div[data-cmp="pricing"]').text.lower()
     title = driver.find_element(By.CSS_SELECTOR, 'h1[data-cmp="heading"]').text.lower()
 
@@ -52,8 +52,6 @@ def get_sales_data(driver, link):
     miles_idx = words.index('miles')-1
     mileage = words[miles_idx].strip()
 
-    # TODO: Test this
-
     # Sale date
     soup = get_soup(driver)
 
@@ -66,10 +64,9 @@ def get_sales_data(driver, link):
         parent_text = target_element.parent.get_text()
         parent_dict = json.loads(parent_text[len(target_str):])
         pricing_history = find_in_dict(parent_dict, 'pricingHistory')
-        # TODO: Format
-        date = pricing_history
+        list_date = pricing_history[0]['dateUpdated']
     else:
-        date = None
+        list_date = None
 
     info = {
         'vin': vin,
@@ -78,7 +75,7 @@ def get_sales_data(driver, link):
         'state': state,
         'engine': engine,
         'mileage': mileage,
-        'date': date
+        'list_date': list_date
     }
     return info
 
