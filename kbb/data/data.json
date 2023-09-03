@@ -6,120 +6,13 @@
         "state": "MI"
     },
     {
-        "vin": "1FT8W2BT7MED24365",
-        "price": "82,500",
-        "title": "Certified 2021 Ford F250 Lariat w/ Lariat Ultimate Package",
-        "state": "MI"
-    },
-    {
-        "vin": "1FT8W2BT7MED24365",
-        "price": "82,500",
-        "title": "Certified 2021 Ford F250 Lariat w/ Lariat Ultimate Package",
-        "state": "MI"
-    },
-    {
-        "vin": "3MW5R7J05L8B30298",
-        "price": "35,490",
-        "title": "Used 2020 BMW 330i xDrive Sedan w/ Driving Assistance Package",
-        "state": "MI"
-    },
-    {
-        "vin": "1GNSKRKD7MR468033",
-        "price": "64,559",
-        "title": "Used 2021 Chevrolet Tahoe RST",
-        "state": "MI"
-    },
-    {
-        "vin": "3GNAXJEVXLS689429",
-        "price": "23,495",
-        "title": "Used 2020 Chevrolet Equinox LT w/ Driver Convenience Package",
-        "state": "MI"
-    },
-    {
-        "vin": "W1W4DBHY0MT049011",
-        "price": "99,990",
-        "title": "Used 2021 Mercedes-Benz Sprinter 144\" Cargo",
-        "state": "MI"
-    },
-    {
-        "vin": "W1W4DBHY0MT049011",
-        "price": "99,990",
-        "title": "Used 2021 Mercedes-Benz Sprinter 144\" Cargo",
-        "state": "MI"
-    },
-    {
-        "vin": "W1W4DBHY0MT049011",
-        "price": "99,990",
-        "title": "Used 2021 Mercedes-Benz Sprinter 144\" Cargo",
-        "state": "MI"
-    },
-    {
-        "vin": "W1W4DBHY0MT049011",
-        "price": "99,990",
-        "title": "Used 2021 Mercedes-Benz Sprinter 144\" Cargo",
-        "state": "MI"
-    },
-    {
-        "vin": "3GNAXJEVXLS689429",
-        "price": "21,526",
-        "title": "Used 2020 Chevrolet Equinox LT w/ Driver Convenience Package",
-        "state": "MI"
-    },
-    {
-        "vin": "1C4SDJCT4LC188324",
-        "price": "43,276",
-        "title": "Used 2020 Dodge Durango R/T w/ Blacktop Package",
-        "state": "MI"
-    },
-    {
-        "vin": "1C6SRFLT5LN205058",
-        "price": "46,318",
-        "title": "Used 2020 RAM 1500 Rebel",
-        "state": "MI"
-    },
-    {
-        "vin": "2HKRW2H89KH139271",
-        "price": "28,495",
-        "title": "Used 2019 Honda CR-V EX-L",
-        "state": "MI"
-    },
-    {
-        "vin": "3C4NJDBBXJT239200",
-        "price": "20,168",
-        "title": "Used 2018 Jeep Compass Latitude w/ Popular Equipment Group",
-        "state": "MI"
-    },
-    {
-        "vin": "w1w4dbhy0mt049011",
-        "price": "99,990",
-        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
-        "state": "MI",
-        "engine": "diesel",
-        "mileage": "17,385"
-    },
-    {
-        "vin": "w1w4dbhy0mt049011",
-        "price": "99,990",
-        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
-        "state": "MI",
-        "engine": "diesel",
-        "mileage": "17,385"
-    },
-    {
-        "vin": "w1w4dbhy0mt049011",
-        "price": "99,990",
-        "title": "used 2021 mercedes-benz sprinter 144\" cargo",
-        "state": "MI",
-        "engine": "diesel",
-        "mileage": "17,385"
-    },
-    {
-        "vin": "3gnaxjevxls689429",
-        "price": "21,379",
-        "title": "used 2020 chevrolet equinox lt w/ driver convenience package",
+        "vin": "1c4njpfa2gd526872",
+        "price": "12,000",
+        "title": "used 2016 jeep patriot high altitude",
         "state": "MI",
         "engine": "gas",
-        "mileage": "21,922"
+        "mileage": "93,463",
+        "list_date": "08.04.2023"
     },
     {
         "vin": "1c4njpfa2gd526872",
@@ -128,23 +21,87 @@
         "state": "MI",
         "engine": "gas",
         "mileage": "93,463",
-        "date": [
-            {
-                "dateUpdated": "08.04.2023",
-                "price": "$13,500"
-            },
-            {
-                "dateUpdated": "08.05.2023",
-                "price": "$13,000"
-            },
-            {
-                "dateUpdated": "08.07.2023",
-                "price": "$12,500"
-            },
-            {
-                "dateUpdated": "Price Today",
-                "price": "$12,000"
-            }
-        ]
+        "list_date": "08.04.2023"
+    },
+    {
+        "vin": "1gkknkls8lz164233",
+        "price": "27,330",
+        "title": "certified 2020 gmc acadia sle w/ driver convenience package",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "19,419",
+        "list_date": "06.27.2023"
+    },
+    {
+        "vin": "1c6srflt5ln205058",
+        "price": "43,995",
+        "title": "used 2020 ram 1500 rebel",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "27,346",
+        "list_date": "08.02.2023"
+    },
+    {
+        "vin": "1c4sjvbt2ns180555",
+        "price": "63,277",
+        "title": "used 2022 jeep wagoneer series ii w/ convenience group i",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "6,250",
+        "list_date": "08.02.2023"
+    },
+    {
+        "vin": "5n1at2mv4jc815858",
+        "price": "19,995",
+        "title": "used 2018 nissan rogue sl",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "64,675",
+        "list_date": "08.05.2023"
+    },
+    {
+        "vin": "1c4pjmdx4md161797",
+        "price": "28,495",
+        "title": "used 2021 jeep cherokee limited",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "26,592",
+        "list_date": "08.02.2023"
+    },
+    {
+        "vin": "1fter4fh2mld46166",
+        "price": "34,202",
+        "title": "used 2021 ford ranger xlt w/ equipment group 301a mid",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "14,837",
+        "list_date": "07.24.2023"
+    },
+    {
+        "vin": "1c4pjmbx2nd504739",
+        "price": "33,759",
+        "title": "used 2022 jeep cherokee trailhawk",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "25,447",
+        "list_date": "07.26.2023"
+    },
+    {
+        "vin": "1c4sdjct4lc188324",
+        "price": "42,103",
+        "title": "used 2020 dodge durango r/t w/ blacktop package",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "16,428",
+        "list_date": "08.01.2023"
+    },
+    {
+        "vin": "1g1ya3d4xn5120504",
+        "price": "75,991",
+        "title": "used 2022 chevrolet corvette stingray convertible w/ 1lt",
+        "state": "MI",
+        "engine": "gas",
+        "mileage": "9,223",
+        "list_date": "08.14.2023"
     }
 ]
