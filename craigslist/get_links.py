@@ -4,6 +4,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+
+# TODO: Update with radius/zip format
+
 driver = get_selenium_driver()
 cities = [
     'annarbor',

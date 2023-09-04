@@ -7,22 +7,22 @@ case $SERVICE in
 
   'links')
 
+    echo "zip_code=$ZIP_CODE"
+    echo "radius=$RADIUS"
+
     case $PLATFORM in
 
-      echo "Zip=$ZIP_CODE"
-      echo "Radius=$RADIUS"
-
-      # TODO: edit all get_links to take zip and radius
+      # TODO: add sqs_queue_id
       'ebay')
-        python ./ebay/get_links.py --zip $ZIP_CODE --radius $RADIUS
+        python ./ebay/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
       ;;
 
       'kbb')
-        python ./kbb/get_links.py --zip $ZIP_CODE --radius $RADIUS
+        python ./kbb/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
       ;;
 
       'craigslist')
-        python ./craigslist/get_links.py --zip $ZIP_CODE --radius $RADIUS
+        python ./craigslist/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
       ;;
 
       *)
@@ -34,9 +34,9 @@ case $SERVICE in
 
   'data')
 
-    case $PLATFORM in
+    echo "url=$URL"
 
-      echo "url=$URL"
+    case $PLATFORM in
 
       # TODO: edit all get_data files to take url as env variable
       'ebay')
