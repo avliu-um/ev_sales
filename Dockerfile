@@ -8,5 +8,5 @@ RUN pip3 install --upgrade pip
 RUN pip install -r requirements.txt
 RUN apt update && apt install -y chromium-driver
 
-ENTRYPOINT ["sh", "./run.sh"]
+CMD ["sh", "./run.sh"]
 
