@@ -12,17 +12,17 @@ case $SERVICE in
 
     case $PLATFORM in
 
-      # TODO: add sqs_queue_id
       'ebay')
-        python ./ebay/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
+        python ./ebay/get_links.py --zip_code $ZIP_CODE --radius $RADIUS --sqs_queue_id $SQS_QUEUE_ID
       ;;
 
       'kbb')
-        python ./kbb/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
+        python ./kbb/get_links.py --zip_code $ZIP_CODE --radius $RADIUS --sqs_queue_id $SQS_QUEUE_ID
       ;;
 
+      # TODO: Implement this python file
       'craigslist')
-        python ./craigslist/get_links.py --zip_code $ZIP_CODE --radius $RADIUS
+        python ./craigslist/get_links.py --zip_code $ZIP_CODE --radius $RADIUS --sqs_queue_id $SQS_QUEUE_ID
       ;;
 
       *)
