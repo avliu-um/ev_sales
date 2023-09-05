@@ -10,6 +10,9 @@ from scraper_util_avliu.util import get_soup, get_soup_text, append_to_json, rem
 
 # Parse a selse link for the data we require, including price, location, and other info
 def get_data(url):
+    if not url:
+        url = os.environ.get('url')
+
     soup = get_soup(url)
     info = {}
 
