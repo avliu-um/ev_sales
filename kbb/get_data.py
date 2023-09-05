@@ -9,11 +9,16 @@ from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 import time
 import re
 import json
+import os
 
 
 # Parse a selse link for the data we require, including price, location, and vin
-def get_sales_data(driver, link):
-    driver.get(link)
+def get_data(url):
+    if not url:
+        url = os.environ.get('url')
+
+    driver = get_selenium_driver(undetected=True)
+    driver.get(url)
 
     # wait for, then scroll from, the "make a deal" container
     WebDriverWait(driver, 60).until(
@@ -80,24 +85,24 @@ def get_sales_data(driver, link):
     return info
 
 
-all_item_links = pd.read_csv('./data/links.csv', header=None)[0]
+if __name__ == '__main__':
 
-driver = get_selenium_driver(undetected=True)
+    all_item_links = pd.read_csv('./data/links.csv', header=None)[0]
 
-start_secs = time.time()
-for item_link in all_item_links:
-    print(f'processing link: {item_link}')
-    try:
-        data_dict = get_sales_data(driver, item_link)
-        print(f'data: {data_dict}')
-        append_to_json('data/data.json', data_dict)
-    except Exception as e:
-        print(f'failed')
-        traceback.print_exc()
-        print(e)
-end_secs = time.time()
-print('\ndone!')
-print(f'took {end_secs - start_secs} seconds')
+    start_secs = time.time()
+    for item_link in all_item_links:
+        print(f'processing link: {item_link}')
+        try:
+            data_dict = get_data(item_link)
+            print(f'data: {data_dict}')
+            append_to_json('data/data.json', data_dict)
+        except Exception as e:
+            print(f'failed')
+            traceback.print_exc()
+            print(e)
+    end_secs = time.time()
+    print('\ndone!')
+    print(f'took {end_secs - start_secs} seconds')
 
 
 

@@ -47,7 +47,7 @@ def get_links(zip_code, radius, sqs_queue_id, page_limit=500):
             # Write the data:
             append_to_file('./data/links.csv', links)
             if sqs_queue_id:
-                sqs_messages = [{"service": "data", "platform": "kbb", "url": link} for link in links]
+                sqs_messages = [{"platform": "kbb", "url": link} for link in links]
                 write_to_sqs(sqs_queue_id, sqs_messages)
 
         page += 1

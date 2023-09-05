@@ -38,7 +38,6 @@ case $SERVICE in
 
     case $PLATFORM in
 
-      # TODO: edit all get_data files to take url as env variable
       'ebay')
         python ./ebay/get_data.py --url $URL
       ;;
@@ -47,6 +46,7 @@ case $SERVICE in
         python ./kbb/get_data.py --url $URL
       ;;
 
+      # TODO: Implement this Python file
       'craigslist')
         python ./craigslist/get_data.py --url $URL
       ;;

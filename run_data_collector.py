@@ -1,18 +1,15 @@
-import boto3
 import os
+from scraper_util_avliu.util import read_from_sqs
 
 queue_id = os.environ.get('sqs_queue_id')
 
-sqs = boto3.resource('sqs')
-client = sqs.Queue(f'{queue_id}')
-message = client.receive_messages(MaxNumberOfMessages=1)
+message = read_from_sqs(queue_id)
 
-platform = message.platform
-url = message.url
+platform = message['platform']
+url = message['url']
 
 print(f'platform: {platform}, url: {url}')
 
-# TODO: Edit all get_data files to take url as parameter
 if platform == 'ebay':
 	from ebay import get_data
 elif platform == 'kbb':
@@ -23,4 +20,4 @@ else:
 	print("error things because we're sad")
 	raise NotImplementedError
 
-get_data(url)
+get_data.get_data(url)
