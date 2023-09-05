@@ -34,7 +34,7 @@ def get_links(zip_code, radius, sqs_queue_id, page_limit=500):
 
         append_to_file('./data/links.csv', links)
         if sqs_queue_id:
-            sqs_messages = [{'platform': 'ebay', 'url': link} for link in links]
+            sqs_messages = [{"service": "data", "platform": "ebay", "url": link} for link in links]
             write_to_sqs(sqs_queue_id, sqs_messages)
 
         page += 1
