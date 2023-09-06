@@ -1,5 +1,4 @@
 import os
-from scraper_util_avliu.util import read_from_sqs
 
 
 if __name__ == '__main__':

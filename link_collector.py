@@ -1,5 +1,5 @@
 import os
-from scraper_util_avliu.util import append_to_file, write_to_sqs, get_selenium_driver, get_soup
+from util import append_to_file, write_to_sqs, get_selenium_driver, get_soup
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By

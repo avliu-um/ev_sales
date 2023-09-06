@@ -1,5 +1,5 @@
-from scraper_util_avliu.util import (append_to_json, get_selenium_driver, get_soup, find_in_dict, get_soup_text,
-                                     remove_symbols_str, read_from_sqs)
+from util import (append_to_json, get_selenium_driver, get_soup, find_in_dict, get_soup_text, remove_symbols_str,
+                  read_from_sqs)
 import json, re
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
