@@ -1,5 +1,5 @@
 from util import (append_to_json, get_selenium_driver, get_soup, find_in_dict, get_soup_text, remove_symbols_str,
-                  read_from_sqs)
+                  read_from_sqs, get_today)
 import json, re
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,28 +10,22 @@ from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 
 class DataCollector:
 
-    def __init__(self, *args, **kwargs):
-        self.url = None
-        self.platform = None
-        if len(args) == 1:
-            self.init_sqs(args[0])
-        elif len(args) == 2:
-            self.init_platform_url(args[0], args[1])
-        else:
-            raise Exception("Invalid number of arguments")
+    def __init__(self, sqs_queue_id=None, platform=None, url=None):
+        if sqs_queue_id:
+            message = read_from_sqs(sqs_queue_id=sqs_queue_id)
+            platform = message['platform']
+            url = message['url']
 
-    def init_sqs(self, sqs_queue_id):
-        message = read_from_sqs(sqs_queue_id=sqs_queue_id)
-        platform = message['platform']
-        url = message['url']
+        # Make sure we got these params, either from sqs queue or otherwise
+        assert(platform and url)
+
         self.url = url
         self.platform = platform
 
-    def init_platform_url(self, platform, url):
-        self.platform = platform
-        self.url = url
+        self.file_name = f'data_{get_today()}_{self.platform}'
 
     def get_data(self):
+        print(f'getting data for platform {self.platform} and url {self.url}')
         data = None
         if self.platform == 'kbb':
             data = self.kbb_get_data()
@@ -43,7 +37,7 @@ class DataCollector:
             print('crying')
 
         # Write the data
-        append_to_json('data/data.json', data)
+        append_to_json(f'data/{self.file_name}.json', data)
 
     def kbb_get_data(self):
         driver = get_selenium_driver(undetected=True)
@@ -138,11 +132,15 @@ class DataCollector:
 
         return info
 
+    # TODO: Implement
     def craigslist_get_data(self):
         data = {}
         return data
 
 
 if __name__ == '__main__':
-    dc = DataCollector(platform='kbb', url='https://google.com')
+    #dc = DataCollector(platform='kbb', url='https://google.com')
+    #dc = DataCollector(platform='ebay', url='https://google.com')
+    dc = DataCollector(platform='craigslist', url='https://google.com')
+
     dc.get_data()

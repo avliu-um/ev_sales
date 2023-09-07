@@ -18,18 +18,18 @@ import datetime
 def get_selenium_driver(undetected=False):
     # adblock_filepath = '../lib/adblock.crx'
 
+    # Goal is to set custom env variable only if we're running locally
+    headless = os.environ.get('HEADLESS')
+    if not headless:
+        headless = 'True'
+    headless = False if headless == 'False' else True
+
     if undetected:
 
         # The below code is extremely hacky, but accomplishes a few things:
         # (1) Makes default headless/executable to be the one we need in cloud
         # (2) Allows us to specify other options locally via env vars for testing
         # (3) Maintains everything in detected chromedriver because it doesn't need edecutable
-
-        # Goal is to set custom env variable only if we're running locally
-        headless = os.environ.get('HEADLESS')
-        if not headless:
-            headless = 'True'
-        headless = False if headless == 'False' else True
 
         driver_executable_path = os.environ.get('DRIVER_EXECUTABLE_PATH')
         if not driver_executable_path:
@@ -254,6 +254,10 @@ def read_from_sqs(sqs_queue_id: str):
 
     return message_body
 
+
+def get_today():
+    today = datetime.datetime.today().strftime('%Y-%m-%d')
+    return today
 
 def main():
     bucket = 'test-youtube-audit-bucket'

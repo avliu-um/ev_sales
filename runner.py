@@ -6,8 +6,8 @@ if __name__ == '__main__':
 
 	if service == 'links':
 		platform = os.environ.get('platform')
-		zip_code = os.environ.get('zip_code')
-		radius = os.environ.get('radius')
+		zip_code = int(os.environ.get('zip_code'))
+		radius = int(os.environ.get('radius'))
 		sqs_queue_id = os.environ.get('sqs_queue_id')
 
 		from link_collector import LinkCollector
