@@ -132,10 +132,54 @@ class DataCollector:
 
         return info
 
-    # TODO: Implement
+
     def craigslist_get_data(self):
-        data = {}
-        return data
+        soup = get_soup(link)
+        info = {}
+        
+        # add post metadata - id, timestamp
+        id_css = 'div[class="postinginfos"] p[class="postinginfo"]'
+        info['post_id'] = soup.select_one(id_css).text.split(': ')[1]
+        info['post_datetime'] = soup.time.get('datetime')
+        
+        # add post expiration date (not applicable for all posts)
+        expire_date = soup.head.find('meta', {'name': 'robots'}).get('content')
+        if expire_date != 'noindex':
+            info['post_expire'] = expire_date.split(': ')[1]
+
+        # get listing attributes
+        info_list = get_soup_text(soup, 'div[class=mapAndAttrs] p[class=attrgroup] span')
+        for item in info_list:
+            sep_idx = item.find(':')
+            if sep_idx > 0:
+                info[item[:sep_idx].strip()] = item[sep_idx+1:].strip()
+            else:
+                if 'other' in info.keys():
+                    info['other'] += f'|{item}'
+                else:
+                    info['other'] = item
+
+        # adding price, listing geo attributes
+        json_css = 'script[id="ld_posting_data"]'
+        data = soup.select_one(json_css)
+        if data is not None:
+            info.update(json.loads(data.get_text(strip=True)))
+
+        # adding seller type
+        purveyor_css = 'li[class="crumb section"] a'
+        text = soup.select_one(purveyor_css).get_text()
+        if text is not None:
+            info['seller_type'] = text.split(' ')[-1]
+
+        # adding saler free-form text and url
+        body_css = 'section[id="postingbody"]'
+        text = soup.select_one(body_css).get_text()
+        if text is not None:
+            info['seller_notes'] = re.sub('[\\n]+', ' ', text).strip()
+
+        info['url'] = link
+
+        return info
 
 
 if __name__ == '__main__':

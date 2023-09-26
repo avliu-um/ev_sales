@@ -113,9 +113,38 @@ class LinkCollector:
 
         return links
 
-    # TODO: Implement
+
     def craigslist_get_links(self):
+        
+        print(f'running get_links on cragslist with zip={self.zip_code} and radius={self.radius}')
+        
         links = []
+        page = 1
+        ev_only = True
+        
+        if ev_only:
+            car_type = 'EVs'
+            url = f'https://annarbor.craigslist.org/search/cta?auto_fuel_type=4&bundleDuplicates=1' \
+                  f'&postal={zip_code}&search_distance={radius}#search=1~gallery~{page}~0'
+            #note: city gets redirected by zipcode, using ann arbor as starting point
+        else:
+            car_type = 'all'
+            url = f'https://annarbor.craigslist.org/search/cta?bundleDuplicates=1' \
+                  f'&postal={zip_code}&search_distance={radius}#search=1~gallery~{page}~0'
+            # to-do: research price brackets for all vehicles
+
+        
+        try: 
+            soup = get_soup(url)
+            cars_css = 'li[class="cl-static-search-result"] a'
+            cars = soup.select(cars_css) 
+            links = [car.get('href') for car in cars]    
+            
+            print(f'{len(links)} links found for {car_type} in {self.radius} radius around zip {self.zip_code}')
+
+        except Exception as e:
+            print(f'get links failed: {e}, url: {url}')
+              
         return links
 
 

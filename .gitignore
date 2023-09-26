@@ -4,3 +4,17 @@ other/
 **/.ipynb_checkpoints/
 **/.DS_Store
 ./idea/
+
+
+
+# folders 
+local/
+carfax/
+carguru/
+carvana/
+ebay_historical/
+ebay/
+craigslist/
+sandbox/
+kbb/
+sample_csv/
