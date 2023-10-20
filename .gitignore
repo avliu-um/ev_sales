@@ -24,5 +24,8 @@ venv.bak/
 .ipynb_checkpoints
 
 # archived repo folders
-carvana
-carfax
+carvana/
+carfax/
+ebay/
+carguru/
+sandbox/
